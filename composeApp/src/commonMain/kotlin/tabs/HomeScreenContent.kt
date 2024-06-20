@@ -18,7 +18,7 @@ import navigation.configuration.FeatureAConfig
 import navigation.configuration.FeatureBConfig
 
 @Composable
-fun HomeScreenContent(componentContext: ComponentContext) {
+internal fun HomeScreenContent(componentContext: ComponentContext) {
     val navigator = LocalNavigator.current
     Scaffold(
         modifier = Modifier.fillMaxSize(),

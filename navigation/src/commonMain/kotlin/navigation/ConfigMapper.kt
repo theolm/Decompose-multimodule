@@ -15,4 +15,5 @@ fun Configuration.toScreen(componentContext: ComponentContext) =
         MainConfig.ThumbsUp -> MainScreens.ThumbsUpScreen(componentContext)
         FeatureAConfig.HomeA -> FeatureAScreens.HomeAScreen(componentContext)
         FeatureBConfig.HomeB -> FeatureBScreens.HomeBScreen(componentContext)
+        FeatureBConfig.EndFeature -> FeatureBScreens.EndScreen(componentContext)
     }

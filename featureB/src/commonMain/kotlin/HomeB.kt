@@ -9,9 +9,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ComponentContext
+import com.arkivanov.decompose.router.stack.bringToFront
 import com.arkivanov.decompose.router.stack.push
 import navigation.LocalNavigator
 import navigation.configuration.FeatureAConfig
+import navigation.configuration.FeatureBConfig
 
 @Composable
 internal fun HomeB(componentContext: ComponentContext) {
@@ -32,14 +34,25 @@ internal fun HomeB(componentContext: ComponentContext) {
             verticalArrangement = Arrangement.Center,
         ) {
             Text("Feature B Home")
+
             Button(
                 onClick = {
                     navigator?.apply {
-                        navigation.push(FeatureAConfig.HomeA)
+                        navigation.bringToFront(FeatureBConfig.EndFeature)
                     }
                 }
             ) {
-                Text("Go to B Home")
+                Text("Go to END FEATURE B")
+            }
+
+            Button(
+                onClick = {
+                    navigator?.apply {
+                        navigation.bringToFront(FeatureAConfig.HomeA)
+                    }
+                }
+            ) {
+                Text("Go to A Home")
             }
         }
     }

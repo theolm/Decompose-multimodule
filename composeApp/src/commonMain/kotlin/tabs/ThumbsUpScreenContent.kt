@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import com.arkivanov.decompose.ComponentContext
 
 @Composable
-fun ThumbsUpContent(componentContext: ComponentContext) {
+internal fun ThumbsUpContent(componentContext: ComponentContext) {
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
