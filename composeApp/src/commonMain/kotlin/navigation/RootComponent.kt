@@ -1,11 +1,15 @@
 package navigation
 
 import com.arkivanov.decompose.ComponentContext
+import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.StackAnimation
+import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.fade
+import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.slide
+import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.stackAnimation
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
+import com.arkivanov.decompose.router.stack.active
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.value.Value
-import kotlinx.serialization.Serializable
 import navigation.configuration.Configuration
 import navigation.configuration.MainConfig
 import navigation.screens.MainScreens
@@ -14,7 +18,8 @@ import navigation.screens.Screen
 internal class RootComponent(
     componentContext: ComponentContext,
 ) : ComponentContext by componentContext {
-    val navigation = StackNavigation<Configuration>()
+    private val navigation = StackNavigation<Configuration>()
+    val navigator = Navigator(navigation)
 
     val screenStack: Value<ChildStack<*, Screen>> = childStack(
         source = navigation,
@@ -26,6 +31,8 @@ internal class RootComponent(
         childFactory = ::createChild
     )
 
+
+
     private fun createChild(
         configuration: Configuration,
         componentContext: ComponentContext
@@ -33,3 +40,15 @@ internal class RootComponent(
 
 }
 
+fun ChildStack<*, Screen>.isTab() : Boolean {
+    val active = this.active.instance
+    return active is MainScreens.HomeScreen  || active is MainScreens.ThumbsUpScreen
+}
+
+fun ChildStack<*, Screen>.getAnimation() : StackAnimation<Any, Screen> {
+    return if (isTab()) {
+        stackAnimation(fade())
+    } else {
+        stackAnimation(slide())
+    }
+}
