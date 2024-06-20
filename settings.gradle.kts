@@ -28,4 +28,9 @@ dependencyResolutionManagement {
     }
 }
 
-include(":composeApp")
+include(
+    ":composeApp",
+    ":navigation",
+    ":featureA",
+    ":featureB",
+)
