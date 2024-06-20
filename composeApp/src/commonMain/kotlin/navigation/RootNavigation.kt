@@ -1,5 +1,6 @@
 package navigation
 
+import RegisterMainGraphProvider
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
@@ -16,6 +17,8 @@ import com.arkivanov.decompose.extensions.compose.jetbrains.stack.Children
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.fade
 import com.arkivanov.decompose.extensions.compose.jetbrains.stack.animation.stackAnimation
 import com.arkivanov.decompose.router.stack.bringToFront
+import navigation.configuration.MainConfig
+import navigation.screens.MainScreens
 import tabs.HomeScreenContent
 import tabs.ThumbsUpContent
 
@@ -59,11 +62,8 @@ internal fun RootNavigation(componentContext: ComponentContext) {
             modifier = Modifier.fillMaxSize(),
             animation = stackAnimation(fade())
         ) {
-            when (val child = it.instance) {
-                is HomeScreen -> HomeScreenContent(child.componentContext)
-                is ThumbsUpScreen -> {
-                     ThumbsUpContent(child.componentContext)
-                }
+            it.instance.apply {
+                RegisterMainGraphProvider()
             }
         }
     }
